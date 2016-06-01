@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="titles">
+        <item>士兵76</item>
+        <item>猎空者</item>
+        <item>法老之鹰</item>
+        <item>狂鼠</item>
+        <item>黑百合</item>
+        <item>死神</item>
+        <item>麦克雷</item>
+        <item>源氏</item>
+        <item>莱茵哈特</item>
+        <item>D.VA</item>
+        <item>小美</item>
+        <item>路霸</item>
+    </string-array>
+</resources>
