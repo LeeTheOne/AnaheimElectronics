@@ -16,5 +16,12 @@
         android:title="delete"
         />
 
+    <item
+        android:id="@+id/action_reset"
+        android:icon="@android:drawable/ic_menu_rotate"
+        AnaheimElectronics:showAsAction="always"
+        android:title="reset"
+        />
+
 
 </menu>
