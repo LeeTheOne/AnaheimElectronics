@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".recyclerview.AERecycleViewActivity"
+            android:theme="@style/AppBaseTheme"
+            android:label="RecyclerView"
+            android:parentActivityName=".launch.AEMainActivity"
+            >
+        </activity>
+
     </application>
 
 </manifest>

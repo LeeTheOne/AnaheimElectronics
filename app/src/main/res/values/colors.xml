@@ -7,4 +7,8 @@
     <color name="colorBlack">#FF000000</color>
     <color name="colorWhite">#ffffffff</color>
     <color name="colorPrimaryTran">#993F51B5</color>
+
+
+    <!-- common value -->
+    <color name="entry_tv_text_color">@color/colorBlack</color>
 </resources>
