@@ -31,6 +31,7 @@ public class NormalRecyclerViewAdapter extends RecyclerView.Adapter<NormalRecycl
     @Override
     public void onBindViewHolder(NormalRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
         holder.mTextView.setText(mTitles[position]);
+        holder.mTextView.setWidth(200 + (position % 4) * 30);
     }
 
     @Override
