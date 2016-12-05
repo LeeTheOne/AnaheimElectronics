@@ -11,4 +11,5 @@
 
     <!-- common value -->
     <color name="entry_tv_text_color">@color/colorBlack</color>
+    <color name="common_scroll_bar_color">#ccbdbdbd</color>
 </resources>

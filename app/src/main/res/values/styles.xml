@@ -17,4 +17,13 @@
         <item name="android:listDivider">@drawable/normal_divider_bg</item>
     </style>
 
+    <style name="common_scroll_bar_style">
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarStyle">insideOverlay</item>
+        <item name="android:scrollbarSize">3dip</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarThumbVertical">@drawable/common_scroll_bar</item>
+    </style>
+
 </resources>

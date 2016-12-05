@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">A.E.</string>
+    <string name="recycler_view_card_name">RecyclerView</string>
+    <string name="rx_java_card_name">RxJava</string>
 </resources>

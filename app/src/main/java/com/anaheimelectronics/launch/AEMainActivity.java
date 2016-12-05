@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.anaheimelectronics.R;
 import com.anaheimelectronics.common.AERootActivity;
+import com.anaheimelectronics.controller.CustomAlbumActivity;
 import com.anaheimelectronics.developing.NormalItemDecoration;
 import com.anaheimelectronics.developing.NormalRecyclerViewAdapter;
 import com.anaheimelectronics.recyclerview.AERecycleViewActivity;
@@ -32,8 +33,8 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
 
     static final String TAG = "AEMainActivity";
 
-    private CardView mEntryCard1;
-    private TextView mEntryTv1;
+    private CardView mEntryCardRecyclerView;
+    private CardView mEntryCardRxJava;
 
     @Override
     protected void initData(Context context, AttributeSet attrs) {
@@ -50,22 +51,30 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
 
     @Override
     protected void bindView() {
-        mEntryCard1 = (CardView)findViewById(R.id.entry_card_1);
-        mEntryTv1 = (TextView)findViewById(R.id.entry_tv_1);
+        mEntryCardRecyclerView = (CardView)findViewById(R.id.entry_card_recycler_view);
+        mEntryCardRxJava = (CardView)findViewById(R.id.entry_card_rx_java);
     }
 
     @Override
     protected void initView() {
-        mEntryTv1.setText("RecyclerView");
-        mEntryCard1.setOnClickListener(this);
+        mEntryCardRecyclerView.setOnClickListener(this);
+        mEntryCardRxJava.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.entry_card_1:
+            case R.id.entry_card_recycler_view:
+            {
                 Intent intent = new Intent(AEMainActivity.this, AERecycleViewActivity.class);
                 startActivity(intent);
+            }
+                break;
+            case R.id.entry_card_rx_java:
+            {
+                Intent intent = new Intent(AEMainActivity.this, CustomAlbumActivity.class);
+                startActivity(intent);
+            }
                 break;
             default:
                 break;

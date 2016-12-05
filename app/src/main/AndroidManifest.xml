@@ -26,6 +26,13 @@
             android:parentActivityName=".launch.AEMainActivity"
             >
         </activity>
+        <activity
+            android:name=".controller.CustomAlbumActivity"
+            android:theme="@style/AppBaseTheme"
+            android:label="CustomAlbum"
+            android:parentActivityName=".launch.AEMainActivity"
+            >
+        </activity>
 
     </application>
 
