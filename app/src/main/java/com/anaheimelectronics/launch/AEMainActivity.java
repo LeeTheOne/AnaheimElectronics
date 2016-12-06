@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.anaheimelectronics.R;
 import com.anaheimelectronics.common.AERootActivity;
+import com.anaheimelectronics.common.AETools;
 import com.anaheimelectronics.controller.CustomAlbumActivity;
 import com.anaheimelectronics.developing.NormalItemDecoration;
 import com.anaheimelectronics.developing.NormalRecyclerViewAdapter;
@@ -38,6 +39,7 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
 
     @Override
     protected void initData(Context context, AttributeSet attrs) {
+        AETools.APPLICATION_CONTEXT = getApplicationContext();
     }
 
     @Override

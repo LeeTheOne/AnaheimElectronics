@@ -10,8 +10,13 @@ import android.view.View;
 import com.anaheimelectronics.R;
 import com.anaheimelectronics.common.AERootActivity;
 import com.anaheimelectronics.developing.NormalRecyclerViewAdapter;
+import com.anaheimelectronics.model.AlbumItem;
+import com.anaheimelectronics.model.CustomAlbumDataHelper;
+
+import java.util.List;
 
 import butterknife.Bind;
+import rx.functions.Action1;
 
 /**
  * Created by zacharyli on 2016/12/3.
@@ -21,11 +26,11 @@ public class CustomAlbumActivity extends AERootActivity {
 
     @Bind(R.id.album_grid_view) RecyclerView mAlbumGridView;
 
-    private NormalRecyclerViewAdapter mAdapter;
+    private CustomAlbumAdapter mAdapter;
 
     @Override
     protected void initData(Context context, AttributeSet attrs) {
-        mAdapter = new NormalRecyclerViewAdapter(CustomAlbumActivity.this);
+        mAdapter = new CustomAlbumAdapter(CustomAlbumActivity.this);
     }
 
     @Override
@@ -43,5 +48,11 @@ public class CustomAlbumActivity extends AERootActivity {
     protected void initView() {
         mAlbumGridView.setLayoutManager(new GridLayoutManager(this, 3));
         mAlbumGridView.setAdapter(mAdapter);
+        CustomAlbumDataHelper.getInstance().getData().subscribe(new Action1<List<AlbumItem>>() {
+            @Override
+            public void call(List<AlbumItem> albumItems) {
+                mAdapter.updateData(albumItems);
+            }
+        });
     }
 }
