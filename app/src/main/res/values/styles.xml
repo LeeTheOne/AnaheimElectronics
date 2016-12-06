@@ -16,6 +16,21 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:listDivider">@drawable/normal_divider_bg</item>
     </style>
+    <!-- base NoActionBar theme. -->
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:listDivider">@drawable/normal_divider_bg</item>
+    </style>
+    <!-- base Fullscreen theme. -->
+    <style name="AppThemeFull" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:listDivider">@drawable/normal_divider_bg</item>
+    </style>
 
     <style name="common_scroll_bar_style">
         <item name="android:fastScrollEnabled">false</item>

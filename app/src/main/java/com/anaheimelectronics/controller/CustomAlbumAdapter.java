@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -28,6 +29,12 @@ import rx.schedulers.Schedulers;
  */
 
 public class CustomAlbumAdapter extends RecyclerView.Adapter<CustomAlbumAdapter.CustomAlbumViewHolder>{
+
+    public interface IOnAlbumItemClickListener{
+        void onAlbumItemClick(View view, int position, AlbumItem item);
+        void onAlbumItemLongClick(View view, int position, AlbumItem item);
+    }
+    private IOnAlbumItemClickListener onAlbumItemClickListener;
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
@@ -49,13 +56,17 @@ public class CustomAlbumAdapter extends RecyclerView.Adapter<CustomAlbumAdapter.
         notifyDataSetChanged();
     }
 
+    public void setOnAlbumItemClickListener(IOnAlbumItemClickListener listener){
+        onAlbumItemClickListener = listener;
+    }
+
     @Override
     public CustomAlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new CustomAlbumViewHolder(mLayoutInflater.inflate(R.layout.custom_album_item_view,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(final CustomAlbumViewHolder holder, int position) {
+    public void onBindViewHolder(final CustomAlbumViewHolder holder, final int position) {
 
         Observable.just(position)
         .observeOn(Schedulers.io())
@@ -71,9 +82,31 @@ public class CustomAlbumAdapter extends RecyclerView.Adapter<CustomAlbumAdapter.
         .subscribe(new Action1<Bitmap>() {
             @Override
             public void call(Bitmap bitmap) {
+                if(holder.getLayoutPosition() != position){
+                    return;
+                }
                 holder.mImageView.setImageBitmap(bitmap);
             }
         });
+
+        //bind listener
+        if(onAlbumItemClickListener != null){
+            holder.mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onAlbumItemClickListener.onAlbumItemClick(v,pos,mDatas.get(pos));
+                }
+            });
+            holder.mImageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onAlbumItemClickListener.onAlbumItemLongClick(v,pos,mDatas.get(pos));
+                    return false;
+                }
+            });
+        }
     }
 
     @Override

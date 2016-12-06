@@ -63,6 +63,12 @@
             android:parentActivityName=".launch.AEMainActivity"
             >
         </activity>
+        <activity
+            android:name=".controller.ImageViewerActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:label="ImageViewer"
+            >
+        </activity>
 
     </application>
 

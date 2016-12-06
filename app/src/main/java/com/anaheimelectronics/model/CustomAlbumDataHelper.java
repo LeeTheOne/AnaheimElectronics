@@ -46,8 +46,7 @@ public class CustomAlbumDataHelper {
                 subscriber.onCompleted();
             }
         })
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread());
+        .subscribeOn(Schedulers.io());
     }
 
     private List<AlbumItem> obtainData(){
