@@ -8,9 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.anaheimelectronics.R;
 import com.anaheimelectronics.common.AEBaseActivity;
@@ -22,7 +25,7 @@ import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 import uk.co.senab.photoview.ImageViewZoomHelper;
 
@@ -52,6 +55,7 @@ public class ImageViewerActivity extends AEBaseActivity {
 
 
     @Bind(R.id.image_view) ImageView imageView;
+    @Bind(R.id.image_viewer_progress_bar) ProgressBar progressBar;
 
     private ImageData mImageData;
     private ImageViewZoomHelper mZoomHelper;
@@ -76,7 +80,7 @@ public class ImageViewerActivity extends AEBaseActivity {
         updateImageView(mImageData.local_path);
     }
 
-    private void updateImageView(@Nullable final String path){
+    private void updateImageView(@NonNull final String path){
 
         Observable.create(new Observable.OnSubscribe<Bitmap>() {
             @Override
@@ -98,17 +102,44 @@ public class ImageViewerActivity extends AEBaseActivity {
             }
         })
         .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<Bitmap>() {
+        .doOnSubscribe(new Action0() {
             @Override
-            public void call(Bitmap bitmap) {
+            public void call() {
+                showProgress();
+            }
+        })
+        .subscribeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<Bitmap>() {
+
+            @Override
+            public void onCompleted() {
+                dismissProgress();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dismissProgress();
+            }
+
+            @Override
+            public void onNext(Bitmap bitmap) {
                 showImage(bitmap);
             }
         });
+
     }
 
     private void showImage(Bitmap bitmap){
         imageView.setImageBitmap(bitmap);
         mZoomHelper.update();
+    }
+
+    private void showProgress(){
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void dismissProgress(){
+        progressBar.setVisibility(View.GONE);
     }
 }
