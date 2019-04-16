@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import butterknife.ButterKnife;
 
 /**
  * Created by zacharyMac on 16/5/31.
@@ -20,7 +19,6 @@ public abstract class AERootActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLayout(LayoutInflater.from(this));
-        ButterKnife.bind(this);
         bindView();
         initData(this, null);
         initView();

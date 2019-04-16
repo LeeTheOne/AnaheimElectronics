@@ -10,10 +10,6 @@ import com.anaheimelectronics.common.AETools;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by zacharyli on 2016/12/5.
@@ -37,17 +33,6 @@ public class CustomAlbumDataHelper {
         return sInstance;
     }
 
-    public Observable<List<AlbumItem>> getData(){
-        return Observable.create(new Observable.OnSubscribe<List<AlbumItem>>() {
-            @Override
-            public void call(Subscriber<? super List<AlbumItem>> subscriber) {
-                List<AlbumItem> paths = obtainData();
-                subscriber.onNext(paths);
-                subscriber.onCompleted();
-            }
-        })
-        .subscribeOn(Schedulers.io());
-    }
 
     private List<AlbumItem> obtainData(){
         ArrayList<AlbumItem> list = new ArrayList<AlbumItem>();

@@ -16,9 +16,6 @@ import com.anaheimelectronics.model.ImageData;
 
 import java.util.List;
 
-import butterknife.Bind;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * Created by zacharyli on 2016/12/3.
@@ -26,7 +23,7 @@ import rx.functions.Action1;
 
 public class CustomAlbumActivity extends AERootActivity implements CustomAlbumAdapter.IOnAlbumItemClickListener{
 
-    @Bind(R.id.album_grid_view) RecyclerView mAlbumGridView;
+    RecyclerView mAlbumGridView = findViewById(R.id.album_grid_view);
 
     private CustomAlbumAdapter mAdapter;
 
@@ -50,14 +47,14 @@ public class CustomAlbumActivity extends AERootActivity implements CustomAlbumAd
     protected void initView() {
         mAlbumGridView.setLayoutManager(new GridLayoutManager(this, 3));
         mAlbumGridView.setAdapter(mAdapter);
-        CustomAlbumDataHelper.getInstance().getData()
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<List<AlbumItem>>() {
-            @Override
-            public void call(List<AlbumItem> albumItems) {
-                mAdapter.updateData(albumItems);
-            }
-        });
+//        CustomAlbumDataHelper.getInstance().getData()
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribe(new Action1<List<AlbumItem>>() {
+//            @Override
+//            public void call(List<AlbumItem> albumItems) {
+//                mAdapter.updateData(albumItems);
+//            }
+//        });
 
         mAdapter.setOnAlbumItemClickListener(this);
     }

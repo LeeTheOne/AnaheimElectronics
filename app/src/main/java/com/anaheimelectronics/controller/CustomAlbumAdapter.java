@@ -17,12 +17,6 @@ import com.anaheimelectronics.model.AlbumItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by zacharyli on 2016/12/5.
@@ -68,26 +62,6 @@ public class CustomAlbumAdapter extends RecyclerView.Adapter<CustomAlbumAdapter.
     @Override
     public void onBindViewHolder(final CustomAlbumViewHolder holder, final int position) {
 
-        Observable.just(position)
-        .observeOn(Schedulers.io())
-        .map(new Func1<Integer, Bitmap>() {
-            @Override
-            public Bitmap call(Integer position) {
-                final BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 8;
-                return BitmapFactory.decodeFile(mDatas.get(position).url,options);
-            }
-        })
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<Bitmap>() {
-            @Override
-            public void call(Bitmap bitmap) {
-                if(holder.getLayoutPosition() != position){
-                    return;
-                }
-                holder.mImageView.setImageBitmap(bitmap);
-            }
-        });
 
         //bind listener
         if(onAlbumItemClickListener != null){

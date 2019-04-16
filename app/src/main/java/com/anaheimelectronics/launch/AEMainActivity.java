@@ -35,7 +35,6 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
     static final String TAG = "AEMainActivity";
 
     private CardView mEntryCardRecyclerView;
-    private CardView mEntryCardRxJava;
 
     @Override
     protected void initData(Context context, AttributeSet attrs) {
@@ -44,9 +43,6 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
 
     @Override
     protected View initLayout(LayoutInflater inflater) {
-//        if(getSupportActionBar() != null) {
-//            getSupportActionBar().hide();
-//        }
         setContentView(R.layout.ae_main_layout);
         return null;
     }
@@ -54,13 +50,11 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
     @Override
     protected void bindView() {
         mEntryCardRecyclerView = (CardView)findViewById(R.id.entry_card_recycler_view);
-        mEntryCardRxJava = (CardView)findViewById(R.id.entry_card_rx_java);
     }
 
     @Override
     protected void initView() {
         mEntryCardRecyclerView.setOnClickListener(this);
-        mEntryCardRxJava.setOnClickListener(this);
     }
 
     @Override
@@ -69,12 +63,6 @@ public class AEMainActivity extends AERootActivity implements View.OnClickListen
             case R.id.entry_card_recycler_view:
             {
                 Intent intent = new Intent(AEMainActivity.this, AERecycleViewActivity.class);
-                startActivity(intent);
-            }
-                break;
-            case R.id.entry_card_rx_java:
-            {
-                Intent intent = new Intent(AEMainActivity.this, CustomAlbumActivity.class);
                 startActivity(intent);
             }
                 break;

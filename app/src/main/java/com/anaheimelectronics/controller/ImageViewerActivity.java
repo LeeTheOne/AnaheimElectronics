@@ -1,12 +1,9 @@
 package com.anaheimelectronics.controller;
 
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,13 +17,6 @@ import com.anaheimelectronics.common.AEBaseActivity;
 import com.anaheimelectronics.common.AETools;
 import com.anaheimelectronics.model.ImageData;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 import uk.co.senab.photoview.ImageViewZoomHelper;
 
 /**
@@ -54,8 +44,8 @@ public class ImageViewerActivity extends AEBaseActivity {
     }
 
 
-    @Bind(R.id.image_view) ImageView imageView;
-    @Bind(R.id.image_viewer_progress_bar) ProgressBar progressBar;
+    ImageView imageView = findViewById(R.id.image_view );
+    ProgressBar progressBar = findViewById(R.id.image_viewer_progress_bar);
 
     private ImageData mImageData;
     private ImageViewZoomHelper mZoomHelper;
@@ -68,7 +58,6 @@ public class ImageViewerActivity extends AEBaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.image_viewer_layout);
-        ButterKnife.bind(this);
 
         mZoomHelper = new ImageViewZoomHelper(imageView);
         mImageData = new ImageData();
@@ -82,51 +71,6 @@ public class ImageViewerActivity extends AEBaseActivity {
 
     private void updateImageView(@NonNull final String path){
 
-        Observable.create(new Observable.OnSubscribe<Bitmap>() {
-            @Override
-            public void call(Subscriber<? super Bitmap> subscriber) {
-
-                final BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 128;
-                Bitmap bitmap = BitmapFactory.decodeFile(path,options);
-                subscriber.onNext(bitmap);
-
-                options.inSampleSize = 2;
-                Bitmap srcBitmap = BitmapFactory.decodeFile(path,options);
-                subscriber.onNext(srcBitmap);
-
-                subscriber.onCompleted();
-                if(bitmap != null && bitmap.isRecycled()){
-                    bitmap = null;
-                }
-            }
-        })
-        .subscribeOn(Schedulers.io())
-        .doOnSubscribe(new Action0() {
-            @Override
-            public void call() {
-                showProgress();
-            }
-        })
-        .subscribeOn(AndroidSchedulers.mainThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<Bitmap>() {
-
-            @Override
-            public void onCompleted() {
-                dismissProgress();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                dismissProgress();
-            }
-
-            @Override
-            public void onNext(Bitmap bitmap) {
-                showImage(bitmap);
-            }
-        });
 
     }
 
