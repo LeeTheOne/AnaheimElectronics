@@ -16,6 +16,7 @@ import com.anaheimelectronics.R;
 import com.anaheimelectronics.common.AERootActivity;
 import com.anaheimelectronics.developing.NormalItemDecoration;
 import com.anaheimelectronics.developing.NormalRecyclerViewAdapter;
+import com.anaheimelectronics.leakCanary.ActivityPool;
 
 /**
  * Created by zacharyMac on 16/6/3.
@@ -30,6 +31,8 @@ public class AERecycleViewActivity extends AERootActivity{
     @Override
     protected void initData(Context context, AttributeSet attrs) {
         mAdapter = new NormalRecyclerViewAdapter(AERecycleViewActivity.this);
+
+        ActivityPool.getActivity().addActivity(this);
     }
 
     @Override

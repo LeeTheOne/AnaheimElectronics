@@ -24,6 +24,7 @@ import com.anaheimelectronics.common.AETools;
 import com.anaheimelectronics.controller.CustomAlbumActivity;
 import com.anaheimelectronics.developing.NormalItemDecoration;
 import com.anaheimelectronics.developing.NormalRecyclerViewAdapter;
+import com.anaheimelectronics.leakCanary.ActivityPool;
 import com.anaheimelectronics.recyclerview.AERecycleViewActivity;
 
 import it.gmariotti.recyclerview.itemanimator.ScaleInOutItemAnimator;
